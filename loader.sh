@@ -1,9 +1,9 @@
 #!/bin/bash
 tput civis
 
-# Clear Line
+# 清除行
 CL="\e[2K"
-# Spinner Character
+# 旋转指示器字符
 SPINNER="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
 
 function spinner() {
@@ -12,7 +12,7 @@ function spinner() {
   while :; do
     jobs %1 > /dev/null 2>&1
     [ $? = 0 ] || {
-      printf "${CL}✓ ${task} Done\n"
+      printf "${CL}✓ ${task} 完成\n"
       break
     }
     for (( i=0; i<${#SPINNER}; i++ )); do
@@ -22,11 +22,11 @@ function spinner() {
   done
 }
 
-msg="${2-InProgress}"
+msg="${2-进行中}"
 task="${3-$1}"
 $1 & spinner "$task" "$msg"
 
 tput cnorm
 
-# usage => ./loader.sh "<TIMER_TO_SLEEP>" "<PROGRESS>" "<TASK_NAME>"
-# e.g => ./loader.sh "sleep 5" "..." "Installing Dependencies"
+# 使用示例 => ./loader.sh "<睡眠时间>" "<进度>" "<任务名称>"
+# 例如 => ./loader.sh "sleep 5" "..." "安装依赖项"
